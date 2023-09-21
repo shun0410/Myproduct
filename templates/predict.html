@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block content %}
+<div class = "content">
+    <div>
+        <h1>判定する言葉を入力しよう！</h1>
+        <form action="/result" method="POST">
+            <input type="text" name="word">
+            <input type="submit" value='送信'>
+        </form>
+    </div>
+</div>
+{% endblock %}
