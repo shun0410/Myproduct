@@ -75,17 +75,20 @@ def search_most_similar(vector):
         txt = tokenize(i, 2, 10000, True)
         wakati_travel_text.append(txt)
 
-    df_travel['wakati_travel_text'] = wakati_travel_text
+    df_travel = df.groupby(['場所','スコア'])['口コミ'].apply(list).apply(' '.join).reset_index().sort_values('スコア', ascending=False)
+    df_travel['wakati'] = wakati_travel_text
+    df_travel_texts = df_travel.iloc[:,[0,1,2,3]].reset_index(drop=True)
 
-    place = df_travel.iloc[0,1]
+
+    place = df_travel_texts.iloc[0,0]
     tmp_max =0
-    for i in range(len(df)):
-        vect = calculate_language_vector(df_travel.iloc[i,3])
+    for i in range(len(df_travel_texts)):
+        vect = calculate_language_vector(df_travel_texts.iloc[i,3])
         score = 1-scipy.spatial.distance.cosine(vector, vect)
         if score > tmp_max:
-            place = df_travel.iloc[i,1]
+            place = df_travel_texts.iloc[i,0]
             tmp_max = score
-    return place,tmp_max,vect,df_travel.iloc[0,4]
+    return place,tmp_max
 
 def calculate_emotion_vector(key_list):
     feature_vec = np.zeros((200),dtype = "float32")
