@@ -2,8 +2,11 @@
 {% block content %}
 <div>
    
-    <h1 class="result">あなたにおすすめの旅行先は{{ place }}です！</h1>
-    <a href="/predict">もう一度診断してみる</a>
+    <h2 class="result">あなたにおすすめの旅行先は</h2>
+    <div class="place">{{ place }}</div>
+    <div class="reserch">
+        <a href="/predict">もう一度診断してみる</a>
+    </div>
     
 </div>
 {% endblock %}

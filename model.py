@@ -88,7 +88,7 @@ def search_most_similar(vector):
         if score > tmp_max:
             place = df_travel_texts.iloc[i,0]
             tmp_max = score
-    return place,tmp_max
+    return place
 
 def calculate_emotion_vector(key_list):
     feature_vec = np.zeros((200),dtype = "float32")
